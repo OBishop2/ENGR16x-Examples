@@ -8,6 +8,7 @@ HOSTNAME="engr"
 
 # making deploy executable
 sudo chmod 755 ./deploy.sh
+sudo chmod 755 ./clear_account.sh
 
 echo "Apt updating and upgrading"
 sudo apt-get update --allow-releaseinfo-change-suite
@@ -25,7 +26,37 @@ sudo apt-get install --no-install-recommends -y git libi2c-dev i2c-tools  \
     python3-setuptools python3-pip python3-smbus python3-dev python3-serial python3-rpi.gpio python3-numpy python3-scipy
 
 # install more python libraries because they deserve it :)
-sudo pip3 install numpy matplotlib pandas scipy --break-system-packages --upgrade
+echo "1"
+echo "1"
+echo "1"
+echo "1"
+echo "1"
+echo "1"
+# install more python libraries because they deserve it :)
+sudo apt install python3-numpy
+echo "2"
+echo "2"
+echo "2"
+echo "2"
+echo "2"
+echo "2"
+sudo apt install python3-matplotlib -y
+echo "3"
+echo "3"
+echo "3"
+echo "3"
+echo "3"
+sudo apt install python3-pandas -y
+echo "4"
+echo "4"
+echo "4"
+echo "4"
+sudo apt install python3-scipy -y
+
+echo "5"
+echo "5"
+echo "5"
+echo "5"
 
 # remove geany so thonny is the default editor
 sudo apt-get purge geany -y
@@ -38,6 +69,12 @@ cd grove.py
 # build the code from the repository
 sudo pip3 install . --break-system-packages
 cd /home/pi
+
+git clone https://github.com/engr16x/python-build-hat.git
+cd python-build-hat
+sudo pip3 install . --break-system-packages
+cd /home/pi
+
 # install dependencies for the IMU
 git clone https://github.com/turmary/bmi088-python.git
 cd bmi088-python
@@ -49,9 +86,6 @@ cd ..
 
 # remove unecessary directories (folders)
 rm -rf bmi088-python 
-
-# install BuildHAT library
-sudo pip3 install buildhat --break-system-packages
 
 # update Pi libraries
 sudo apt update
@@ -114,14 +148,11 @@ echo
 echo "Copying newdesktop directory to pi desktop"
 cp -r $CALLDIR/files/new_desktop/. /home/pi/Desktop/new_desktop/
 
-
-# Currently don't have access to the ENGR16x GitHub 
-# Eventually, this repository linked to my personal account needs to be 
-# forked to the official ENGR16x GitHub account, and then this script needs 
-# to be changed to pull from the new repository under the official account
 cd /home/pi/
 # clone the Examples repository (copy the code)
-git clone https://github.com/engr16x/ENGR16x-Examples.git
+# git clone https://github.com/engr16x/ENGR16x-Examples.git
+git clone --depth 1 https://github.com/engr16x/ENGR16x-Examples.git
+
 mkdir /home/pi/Desktop/new_desktop/Examples
 # copy examples to the desktop
 cp -r /home/pi/ENGR16x-Examples/Examples/. /home/pi/Desktop/new_desktop/Examples
@@ -146,11 +177,11 @@ cd /home/pi/Desktop/updates
 
 echo "Setting up Thonny"
 sudo cp -r /home/pi/$FOLDERNAME/Thonny /home/pi/.config/Thonny
-  sudo chmod 777 /home/pi/.config/Thonny/backend.log
-  sudo chmod 777 /home/pi/.config/Thonny/frontend_faults.log
-  sudo chmod 777 /home/pi/.config/Thonny/leave_this_empty
-  sudo chmod 777 /home/pi/.config/Thonny/configuration.ini
-  sudo chmod 777 /home/pi/.config/Thonny/frontend.log
+sudo chmod 777 /home/pi/.config/Thonny/backend.log
+sudo chmod 777 /home/pi/.config/Thonny/frontend_faults.log
+sudo chmod 777 /home/pi/.config/Thonny/leave_this_empty
+sudo chmod 777 /home/pi/.config/Thonny/configuration.ini
+sudo chmod 777 /home/pi/.config/Thonny/frontend.log
 
 echo
 echo "Setting up projects-updates/boat"

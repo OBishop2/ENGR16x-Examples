@@ -17,9 +17,10 @@ def main():
     port = 'A'
 
     # Initializing the motor so the functions within the class can be used
-    motor = Motor(port)
     print("Initiating BuildHAT and motors")
     print("this may take a while (~10 seconds)")
+    motor = Motor(port)
+
 
     try: 
         while True:
@@ -34,7 +35,7 @@ def main():
                 print("Absolute Position: {}".format(absPosition))
                 print("Position: {}".format(position))
 
-                time.sleep(1)
+                time.sleep(.5)
 
             except IOError:
                 print ("\nError occurred while attempting to read values.")

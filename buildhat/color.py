@@ -2,7 +2,6 @@
 
 '''
 Lego Color Sensor:
-        proportional to the amount of infrared rays the left sensor is reading, and a value 
 
     Description:
         This sensor can be used to detect the color in front of itself. This can be read as

@@ -7,11 +7,13 @@
 '''
 IR Sensor:
     Description:
-        This sensor has two values that can be accessed: a value from 0 to 999 that is 
-        proportional to the amount of infrared rays the left sensor is reading, and a value 
-        from 0 to 999 that is proportional to the amount of infrared rays the left sensor is 
-        reading. It is used to determine presence/distance of an infrared source, such as an 
-        LED light or Infrared Beacon.
+        This sensor has two values that can be accessed: a value from 0 to 255 that is 
+        proportional to the intensity of infrared light the left sensor is reading, and a value 
+        from 0 to 255 that is proportional to the intensity of infrared light the right sensor is 
+        reading. It is used to determine presence/distance of a strong infrared source, such as an 
+        LED light or Infrared Beacon. In typical indoor conditions, it is not surprising to get a 
+        zero from both sides of the sensor, but some value should be read in the sun or in the 
+        presence of a powerful source.
 
     Hardware:
         Connect this sensor to any analog port on the Grove BaseHAT: A0, A2, A4, or A6.
@@ -19,7 +21,6 @@ IR Sensor:
         
         More info:
         https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/
-        https://wiki.seeedstudio.com/Grove-Infrared_Reflective_Sensor/
 
 
     Initialization:
@@ -63,7 +64,7 @@ class IRSensor(object):
     def __init__(self, channel1, channel2):
         self.channel1 = channel1
         self.channel2 = channel2
-        self.adc = ADC()
+        self.adc = ADC(address = 0x08)
 
     @property
     def value1(self):

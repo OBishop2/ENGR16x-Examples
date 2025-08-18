@@ -9,7 +9,7 @@ git reset --hard origin/master
 git pull origin master
 
 echo
-echo "Applyting Updates"
+echo "Applying Updates"
 sudo chown -R pi:pi /home/pi/Desktop/updates/donut/donut
 sudo chmod 711 /home/pi/Desktop/updates/donut/donut/run.sh
 sudo /home/pi/Desktop/updates/donut/donut/run.sh

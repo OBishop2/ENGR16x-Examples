@@ -13,7 +13,7 @@ Button:
 
     Hardware:
         The button connects to digital pins on the Grove BaseHAT (any port starting with a D)
-        Initialize the sensor using only the number of the port (do not includ the D)
+        Initialize the sensor using only the number of the port (do not include the D)
         
         More info:
         https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/

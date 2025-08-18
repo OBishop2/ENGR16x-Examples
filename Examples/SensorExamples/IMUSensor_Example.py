@@ -16,7 +16,7 @@ def main():
     
     try: 
         while True:
-            try: 
+            try:
                 # Reading acceleration values and printing them
                 x, y, z = IMU.getAccel()
                 print(" AX = %7.2f m/s^2  AY = %7.2f m/s^2  AZ = %7.2f m/s^2" % (x, y, z))

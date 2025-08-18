@@ -9,9 +9,9 @@ Inertial Measurement Unit (IMU):
     Description:
         This sensor is an IMU with 9 degrees of freedom, including a gyroscope, acclerometer,
         and electronic compass. This sensor can thus be used to read the acceleration
-        (in meters per second squared), angular velocity (in degrees per second), and magnetic 
+        (in m/s^2), angular velocity (in degrees per second), and magnetic 
         field strength (in Micro-teslas). Each of these is formatted as a vector with values 
-        along each access.
+        along each axis.
 
     Hardware:
         Connect this sensor to any I2C port on the Grove BaseHat
@@ -27,7 +27,7 @@ Inertial Measurement Unit (IMU):
         is used.
 
     getAccel():
-        This function returns the current acceleration of the IMU along all 3 axes in M/S^2. This
+        This function returns the current acceleration of the IMU along all 3 axes in m/s^2. This
         vector is output in the form of a tuple. If your IMU's name is 'IMU', acceleration as three
         seperate values looks like this:
 
@@ -42,7 +42,7 @@ Inertial Measurement Unit (IMU):
 
     getMag():
         This function returns the current magnetic field strength at the IMU along all 3 axes in 
-        micro-tesla This vector is output in the form of a tuple. If your IMU's name is 'IMU',
+        micro-tesla. This vector is output in the form of a tuple. If your IMU's name is 'IMU',
         magnetic field strength as three seperate values looks like this:
 
         x_mag, y_mag, z_mag = IMU.getMag()
@@ -162,16 +162,16 @@ class GroveIMU9DOFICM20600(object):
     def __init__(self, addr = ICM20600_I2C_ADDR1):
         self._dev = _akicm.rpi_icm20600_alloc()
         dev_path = "/dev/i2c-{}".format(Bus().bus)
-        icm20600_cfg = ICM20600Cfg(ICM20600_RANGE_2K_DPS,
-                                ICM20600_GYRO_RATE_1K_BW_176,
+        icm20600_cfg = ICM20600Cfg(ICM20600_RANGE_500_DPS,
+                                ICM20600_GYRO_RATE_1K_BW_92,
                                 ICM20600_GYRO_AVERAGE_1,
-                                ICM20600_RANGE_16G,
-                                ICM20600_ACC_RATE_1K_BW_420,
+                                ICM20600_RANGE_8G,
+                                ICM20600_ACC_RATE_1K_BW_218,
                                 ICM20600_ACC_AVERAGE_4,
-                                ICM20600_ICM_6AXIS_LOW_POWER,
+                                ICM20600_ICM_6AXIS_LOW_NOISE,
 				0)
 
-        dev_path = dev_path.encode('utf-8') # SEED STUDIO SHOULD HIRE SETH MCCONKEY
+        dev_path = dev_path.encode('utf-8')
 
         _akicm.rpi_icm20600_init(self._dev,
                              dev_path,

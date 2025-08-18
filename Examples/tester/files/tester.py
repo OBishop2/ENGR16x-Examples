@@ -17,18 +17,21 @@ from printresults import *
 
 if __name__ == "__main__":
         try:
+            #plug the IMU into I2C, Ultrasonic into D22, IR into A0, Button into D5, and motor into port A
                 testresults = []
                 testresults.append(IMU_Test())
                 testresults.append(Ultrasonic_Test())
                 testresults.append(IR_Test())
                 testresults.append(Button_Test())
                 testresults.append(Motor_Test())
+                motor = Motor('A')
+                motor.stop()
+                print("\nTest Results:")
+                for result in testresults:
+                    time.sleep(.5)
+                    result = list(result)
+                    print(f"{result[0]}: {result[1]}")
 
-                printresults(testresults)
-
-                while True:
-                        if KeyboardInterrupt:
-                                sys.exit
 
         except KeyboardInterrupt:
                 sys.exit()

@@ -4,20 +4,20 @@ import cmdgui
 
 
 #PARAMETERS:
-range_low = 25 #Minimum range between lowest value and highest value for pass. Adjust if needed.
-range_high = 400 #Maximum range between lowest value and highest value for pass. Adjust if needed.
-zero_val = 15 #the value for which if the min is above, consider failed
+range_low = 1 #Minimum range between lowest value and highest value for pass. Adjust if needed.
+range_high = 100 #Maximum range between lowest value and highest value for pass. Adjust if needed.
 
 #NOTE: the above value is based on the understanding that 0-1023 is the range of output.
 
 
 def IR_Test():
-        result = ['GroveIR_Test']
+        result = ['IR_Test']
 
-        IRStage = cmdgui.stage(title = 'GroveIR_Test',width = 60, height = 15)
-        cmdgui.setstage(IRStage)
+#         IRStage = cmdgui.stage(title = 'GroveIR_Test',width = 60, height = 15)
+        print("IR Test")
+#         cmdgui.setstage(IRStage)
 
-        cmdgui.writeline(IRStage,'IR will read for 5s, cover up sensors with you hand then point at IR!',1)
+#         cmdgui.writeline(IRStage,'IR will read for 5s, cover up sensors with you hand then point at IR!',1)
 
         minVals = [100000, 100000] #very high values, exact values don't matter
         maxVals = [0, 0]
@@ -38,25 +38,22 @@ def IR_Test():
                 if readval[i] > maxVals[i]:
                     maxVals[i] = readval[i]
 
-            cmdgui.writeline(IRStage,'IR 1: '+ str(readval[0]) + 'IR 2: '+ str(readval[1]),3)
+#             cmdgui.writeline(IRStage,'IR 1: '+ str(readval[0]) + 'IR 2: '+ str(readval[1]),3)
+                print("IR value1: {}   IR value2: {}".format(readval[0], readval[1]))
             
             time.sleep(0.25)
             
-        sen1fail = (maxVals[0]-minVals[0] < range_low) or (maxVals[0]-minVals[0] > range_high) or (minVals[0] > zero_val)
-        sen2fail = (maxVals[1]-minVals[1] < range_low) or (maxVals[1]-minVals[1] > range_high) or (minVals[1] > zero_val)
+        sen1fail = (maxVals[0]-minVals[0] < range_low) or (maxVals[0]-minVals[0] > range_high)
+        sen2fail = (maxVals[1]-minVals[1] < range_low) or (maxVals[1]-minVals[1] > range_high)
 
-        if (sen1fail) and (sen2fail):
-                cmdgui.writeline(IRStage,'ERROR: Neither IR sensor is working.',5)
+        if (sen1fail) or (sen2fail):
+#                 cmdgui.writeline(IRStage,'ERROR: Neither IR sensor is working.',5)
+                print('IR Test: FAILED')
                 result.append('FAILED')
-        elif (sen1fail):
-                cmdgui.writeline(IRStage,'ERROR: IR sensor 1 is not working.',5)
-                result.append('FAILED')
-        elif (sen2fail):
-                cmdgui.writeline(IRStage,'ERROR: IR sensor 2 is not working.',5)
-                result.append('FAILED')
+
         else:
-                cmdgui.writeline(IRStage,'Non-zero values returned, good!',5)
+                print('IR Test: PASSED')
                 result.append('PASSED')
-        cmdgui.writeline(IRStage,str(result[0]+": " + result[1]),6)
+#         cmdgui.writeline(IRStage,str(result[0]+": " + result[1]),6)
         time.sleep(1)
         return(result)

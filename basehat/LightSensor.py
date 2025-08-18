@@ -5,7 +5,6 @@
 ### DO NOT MODIFY CODE IN THIS FILE ###
 
 '''
-        proportional to the amount of infrared rays the left sensor is reading, and a value 
 Light Sensor:
     Description:
         This sensor converts the light level at the bulb shaped detector into a voltage 
@@ -52,7 +51,7 @@ class LightSensor(object):
     '''
     def __init__(self, channel):
         self.channel = channel
-        self.adc = ADC()
+        self.adc = ADC(address = 0x08)
 
     # Gets the current light strength percentage (0% or 100%)
     @property

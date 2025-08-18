@@ -14,12 +14,12 @@ def main():
     # set the pin to be used
     # if sensor is plugged into port A, pin should be 'A'
     # make sure to only plug in the motors to motor ports of the Grove BuildHat ('A', 'B', 'C', 'D')
-    motor = Motor('A')
     print("Initiating BuildHAT and motors")
     print("this may take a while (~10 seconds)")
+    motor = Motor('A')
 
     # uncomment to use Motor B
-    # motorb = Motor('B')
+    # motorB = Motor('B')
 
     # Function to print the current speed, position and absolute position of the motors
     def handle_motor(speed, pos, apos):
@@ -40,56 +40,25 @@ def main():
 
                 # Leave these lines uncommented because they print the current speed, position and absolute position
                 # of the motors and set the default speed
-                #motor.when_rotated = handle_motor
-                #motor.set_default_speed(50)
+                # motor.when_rotated = handle_motor
+                
+                motor.set_default_speed(50)
 
-                # print("Run for degrees 360")
-                # motor.run_for_degrees(360)
-                # time.sleep(3)
+                # manual_run_for_time(motor)
 
-                # print("Run for degrees -360")
-                # motor.run_for_degrees(-360)
-                # time.sleep(3)
+                # run_for_time(motor)
 
-                # print("Start motor")
-                # motor.start()
-                # time.sleep(3)
-                # print("Stop motor")
-                # motor.stop()
-                # time.sleep(1)
+                # run_360_cycle(motor)
 
-                # print("Run for degrees - 180")
-                # motor.run_for_degrees(180)
-                # time.sleep(3)
+                # run_some_rotations(motor)
 
-                # print("Run for degrees - 90")
-                # motor.run_for_degrees(90)
-                # time.sleep(3)
+                # run_between_positions(motor)
 
-                # print("Run for rotations - 2")
-                # motor.run_for_rotations(2)
-                # time.sleep(3)
+                # Make sure to connect a second motor and uncomment line 22
+                # run_two_motors(motor, motorB)
 
-                # print("Run for seconds - 5")
-                # motor.run_for_seconds(5)
-                # time.sleep(3)
+                
 
-                # print("Run both")
-                # motor.run_for_seconds(5, blocking=False)
-                # motorb.run_for_seconds(5, blocking=False)
-                # time.sleep(10)
-
-                # print("Run to position -90")
-                # motor.run_to_position(-90)
-                # time.sleep(3)
-
-                # print("Run to position 90")
-                # motor.run_to_position(90)
-                # time.sleep(3)
-
-                # print("Run to position 180")
-                # motor.run_to_position(180)
-                # time.sleep(3)
 
             except IOError:
                 print ("\nError occurred while attempting to read values.")
@@ -97,6 +66,55 @@ def main():
 
     except KeyboardInterrupt:
         print("\nCtrl+C detected. Exiting...")
+        motor.stop()
+        try:
+            motorB.stop()
+        except:
+            pass
+
+
+
+def manual_run_for_time(motor):
+    print("Start motor")
+    motor.start(50)
+    time.sleep(3)
+    print("Stop motor")
+    motor.stop(0)
+    time.sleep(1)
+
+def run_for_time(motor):
+    print("Run for seconds: 5")
+    motor.run_for_seconds(5)
+    time.sleep(3)
+
+def run_360_cycle(motor):
+    print("Run for degrees 360")
+    motor.run_for_degrees(360)
+    time.sleep(3)
+
+    print("Run for degrees -360")
+    motor.run_for_degrees(-360)
+    time.sleep(3)
+
+def run_some_rotations(motor):
+    print("Run for rotations: 2")
+    motor.run_for_rotations(2)
+    time.sleep(3)
+
+def run_between_positions(motor):
+    print("Run to position -90")
+    motor.run_to_position(-90)
+    time.sleep(3)
+
+    print("Run to position 90")
+    motor.run_to_position(90)
+    time.sleep(3)
+
+def run_two_motors(motor, motorB):
+    print("Run both")
+    motor.run_for_seconds(5, blocking=False)
+    motorB.run_for_seconds(5, blocking=True)
+    time.sleep(5)
 
 if __name__ == '__main__':
     main()

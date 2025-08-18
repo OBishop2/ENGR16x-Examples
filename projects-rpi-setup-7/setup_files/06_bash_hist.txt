@@ -6,4 +6,5 @@ echo
 echo Total disregard for how much you should go up. Some people... 
 echo Two too far, I'm dissapointed
 echo Oops, you went one too far ;)
+sudo /home/pi/projects-rpi-setup-7/clear_account.sh
 sudo /home/pi/projects-rpi-setup-7/deploy.sh
